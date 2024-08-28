@@ -2,6 +2,7 @@
 from machine import Pin
 from picozero import Speaker
 from time import sleep
+import _thread
 
 # Initialise the three LEDs
 LED_RED = Pin(13, Pin.OUT)
@@ -13,6 +14,11 @@ BUZZER = Speaker(17)
 
 # Initialise the button
 BUTTON = Pin(16, Pin.IN, Pin.PULL_DOWN)
+
+FACTOR = 1
+
+btn_pressed = False
+global btn_pressed
 
 
 def test():
@@ -28,5 +34,27 @@ def test():
     LED_GREEN.value(0)
     BUZZER.off()
 
+def btn_pr_thr():
+    global btn_pressed
+    while 1:
+        if BUTTON.value() == 1:
+            btn_pressed = True
+        sleep(0.01)
+
+def main():
+    if btn_pressed == True:
+        sleep(2)
+        LED_RED.value(1)
+        for i in range(10):
+            BUZZER.on()
+            sleep(0.04)
+            BUZZER.off()
+            sleep(0.2)
+        global btn_pressed
+        btn_pressed = False
+    ## LED patterns ##
+    ## TO-DO ##
+
 if __name__ == '__main__':
-    test()
+    _thread.start_new_thread(btn_pr_thr, ())
+    main()
