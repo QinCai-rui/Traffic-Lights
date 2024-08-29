@@ -20,6 +20,13 @@ FACTOR = 1
 btn_pressed = False
 
 
+def test_thr():
+    while 1:
+        LED_RED.value(1)
+        LED_YELLOW.value(1)
+        LED_GREEN.value(1)
+        sleep(1.5)
+
 def test():
     LED_RED.value(1)
     LED_YELLOW.value(1)
@@ -38,33 +45,35 @@ def btn_pr_thr():
     while 1:
         if BUTTON.value() == 1:
             btn_pressed = True
-        sleep(0.01)
+        sleep(0.1)
 
 def main():
     global btn_pressed
-    if btn_pressed == True:
-        sleep(2)
+    while 1:
+        if btn_pressed == True:
+            sleep(2)
+            LED_RED.value(1)
+            for i in range(10):
+                BUZZER.on()
+                sleep(0.04)
+                BUZZER.off()
+                sleep(0.2)
+            btn_pressed = False
         LED_RED.value(1)
-        for i in range(10):
-            BUZZER.on()
-            sleep(0.04)
-            BUZZER.off()
-            sleep(0.2)
-        btn_pressed = False
-    LED_RED.value(1)
-    sleep(5)
-    LED_YELLOW.value(1)
-    sleep(2)
-    LED_RED.value(0)
-    LED_YELLOW.value(0)
-    LED_GREEN.value(1)
-    sleep(5)
-    LED_GREEN.value(0)
-    LED_YELLOW.value(1)
-    sleep(5)
-    LED_YELLOW.value(0)
+        sleep(5)
+        LED_YELLOW.value(1)
+        sleep(2)
+        LED_RED.value(0)
+        LED_YELLOW.value(0)
+        LED_GREEN.value(1)
+        sleep(5)
+        LED_GREEN.value(0)
+        LED_YELLOW.value(1)
+        sleep(5)
+        LED_YELLOW.value(0)
 
 
 if __name__ == '__main__':
-    _thread.start_new_thread(btn_pr_thr, ())
+    #_thread.start_new_thread(test_thr, ())
+    main()
     #test()
