@@ -78,8 +78,9 @@ def btn_pr_thr():
 '''
 
 def main():
-    global btn_pressed
+    #global btn_pressed
     while 1:
+        '''
         if btn_pressed == True:
             sleep(2)
             LED_RED.value(1)
@@ -89,6 +90,7 @@ def main():
                 BUZZER.off()
                 sleep(0.2)
             btn_pressed = False
+        '''
         LED_RED.value(1)
         sleep(5)
         LED_YELLOW.value(1)
