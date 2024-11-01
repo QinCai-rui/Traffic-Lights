@@ -1,6 +1,6 @@
 # Traffic Lights
 
-By QinCai, https://qincai.obl.ong
+By QinCai, https://qincai.xyz
 
 ## Description
 This is a simple hardware traffic lights controller. It has one green light, one yellow light, and one red light, with pedestrian crossing work-in-progress. 
